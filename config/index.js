@@ -18,7 +18,7 @@ module.exports = {
     },
     dev: {
         env: require('./dev.env'),
-        port: 9525,
+        port: 9550,
         autoOpenBrowser: true,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
@@ -31,7 +31,7 @@ module.exports = {
                 // target:'http://192.168.5.183/api/',
                 // target:'http://192.168.5.189:80/api/',
                 // target:'http://192.168.5.189/api/',
-                target:'http://192.168.5.181:80/api/',
+                target:'http://192.168.32.181:80/api/',
                 // target:'http://192.168.5.189:80/api/',
 
                 // target:'http://192.168.5.188/api/',

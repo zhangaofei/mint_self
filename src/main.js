@@ -17,6 +17,11 @@ import 'vue-multiselect/dist/vue-multiselect.min.css';
 import {hasPermission} from './utils/permissionUtil';
 import './styles/common.scss';
 import './styles/client-common.scss';
+// mint=======================================================
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
+
 // register globally
 Vue.prototype.$http = axios;
 Vue.use(ElementUI);
@@ -24,19 +29,6 @@ Vue.use(ElementUI);
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 });
-// function checkHasPermission(roles, id) {
-//
-//     if (store.getters.name && store.getters.name.indexOf('admin') >= 0) {
-//         return true;
-//     }
-//     if (-1 == id) {
-//         return true
-//     }
-//     if (undefined == roles || null == roles) {
-//         return true
-//     }
-//     return hasPermission(roles, {id: id.toString()})
-// }
 
 const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad'];
 router.beforeEach((to, from, next) => {
