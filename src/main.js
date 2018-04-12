@@ -32,11 +32,10 @@ Object.keys(filters).forEach(key => {
 
 const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad'];
 router.beforeEach((to, from, next) => {
-    // console.log('to:',to,'from:',from,'next:',next)
-    // NProgress.start();
     if (store.getters.token) {
+        console.log(store.getters.token,'token')
         if ('/login' === to.path || '/' === to.path || '/admin' === to.path || ('/404' == to.path && '/' == to.redirectedFrom)) {
-            next({path: '/admin/web'});
+            next({path: '/apply'});
         }
         else {
             next();

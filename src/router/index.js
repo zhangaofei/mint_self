@@ -14,6 +14,8 @@ import Layout from '../views/layout/Layout';
 
 import downLoad from '../views/login/downLoad';
 
+//==========================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+import apply from '../views/Mbclient/apply';
 
 const Err404 = resolve => require(['../views/error/404.vue'], resolve);
 const Err401 = resolve => require(['../views/error/401.vue'], resolve);
@@ -43,7 +45,6 @@ export default new Router({
         {path: '/404', component: Err404, hidden: true, meta: -1},
         {path: '/401', component: Err401, hidden: true, meta: -1},
         {id: 1, path: '___', component: Err401, title: true, name: '主页', backColor: 'header'},
-
         {
             id: 4,
             path: '/admin',
@@ -56,6 +57,8 @@ export default new Router({
 
             ]
         },
+        //
+        {path: '/apply', component: apply, hidden: true},
 
         {path: '*', redirect: '/404', hidden: true, meta: -1},
     ]

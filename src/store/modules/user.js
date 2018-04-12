@@ -84,9 +84,6 @@ const user = {
         SET_STATUS: (state, status) => {
             state.status = status;
         },
-        // SET_NAME: (state, c_name) => {
-        //     state.c_name = c_name;
-        // },
         SET_MAIL: (state, mail) => {
             state.mail = mail;
         },
@@ -158,15 +155,6 @@ const user = {
         // 登录
         login({commit}, userInfo) {
             console.log(userInfo,'userInfo=====================');
-            let c_name;let email
-            // if(!userInfo.sec_type){
-            //     // c_name = userInfo.email.trim();
-            //     // email=c_name;
-            //
-            // }else {
-            //     // c_name = userInfo.email.trim();
-            //     // email=c_name;
-            // }
             return new Promise((resolve, reject) => {
                 // loginByEmail(c_name, userInfo.password).then(response => {
                 loginByEmail(userInfo).then(response => {

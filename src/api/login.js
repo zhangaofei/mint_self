@@ -29,10 +29,11 @@ export function loginByEmail(userInfo) {
         }
     }else {
         info={
-            name:userInfo.name,
+            name:userInfo.username,
             password:p,
             t:userInfo.password
-        } 
+        }
+        console.log(info,'info====')
     }
     return fetch({
         url: '/api/enwas/pg/login',

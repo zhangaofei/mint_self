@@ -1,23 +1,28 @@
 <template>
-    <div class="body login" >
+    <div class="logined" >
 
         <div class="top">
             <img :src="logo" alt="00000" class="pointer">
         </div>
         <div class="middle">
-            <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
-            <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
-
+           <div >
+               <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
+               <mt-field label="密码" placeholder="请输入密码" type="password" v-model="form.password"></mt-field>
+           </div>
+            <div class="login">
+                <mt-button size="normal" type="primary" @click="handLogin">登录</mt-button>
+            </div>
         </div>
         <div class="bottom">
             <p class="p1 pointer">注册</p>
             <p class="p2 pointer">忘记密码</p>
         </div>
-
     </div>
 </template>
 <script>
-    import {getGrounpName,userReg} from 'api/register'
+    import {getGrounpName,userReg} from 'api/register';
+    import { Toast } from 'mint-ui';
+
     export default{
         components: {
 
@@ -28,8 +33,10 @@
         data() {
             return {
                 logo:require('@/assets/imgs/git.png'),
-                username:'',
-                password:''
+               form:{
+                   username:'',
+                   password:''
+               }
             }
 
         },
@@ -39,7 +46,18 @@
         methods: {
             handleClose(){
                 console.log('关闭')
-            }
+            },
+            handLogin(){
+              this.$router.push({path:'./apply'});
+                this.$store.dispatch('login',this.form).then((res) => {
+                    if (res.status == 1) {
+                        this.$router.push({path: '/apply'});
+                    }else if (res.status == -1) {
+                        Toast(res.msg);
+                    }
+                })
+            },
+
         }
     }
 </script>
@@ -47,7 +65,9 @@
     .pointer{
         cursor: pointer;
     }
-    .login{
+    .logined{
+        position: relative;
+        min-height: 650px;
         .top{
             text-align: center;
             /*height: 100px;*/
@@ -57,11 +77,18 @@
             }
         }
         .middle{
-
+            .mint-button--primary{
+                display: inline-block;
+                margin-top: 10px;
+                width: 80%;
+            }
+           .login{
+               text-align: center;
+           }
         }
         .bottom{
             overflow: hidden;
-            position: fixed;
+            position: absolute;
             width: 100%;
             bottom: 37px;
             .p1{
