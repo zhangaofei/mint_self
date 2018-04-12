@@ -13,9 +13,14 @@ import redirectIpadT from '../views/login/jumpPage/redirectIpadT';
 import Layout from '../views/layout/Layout';
 
 import downLoad from '../views/login/downLoad';
+<<<<<<< HEAD
 
 //==========================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 import apply from '../views/Mbclient/apply';
+=======
+//=====
+import forgetPsw from '../views/login/loginComponents/forgetPsw';
+>>>>>>> ef3544854a5feaf0b05a2732bd19048634670ab2
 
 const Err404 = resolve => require(['../views/error/404.vue'], resolve);
 const Err401 = resolve => require(['../views/error/401.vue'], resolve);
@@ -40,6 +45,7 @@ export default new Router({
         {path: '/redirectAndroidT', component: redirectAndroidT, hidden: true},
         {path: '/redirectIpadT', component: redirectIpadT, hidden: true},
         {path: '/login', component: Login, hidden: true},
+        {path: '/forgetPsw', component: forgetPsw, hidden: true},
         // {id: 4,path: '/register', component: register,name: 'register', meta: 4},
         {id: 5, path: '/downLoad', component: downLoad, name: 'downLoad', meta: 5},
         {path: '/404', component: Err404, hidden: true, meta: -1},

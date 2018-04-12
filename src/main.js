@@ -30,7 +30,7 @@ Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 });
 
-const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad'];
+const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad','/forgetPsw'];
 router.beforeEach((to, from, next) => {
     if (store.getters.token) {
         console.log(store.getters.token,'token')
