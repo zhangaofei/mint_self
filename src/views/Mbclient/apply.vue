@@ -7,7 +7,7 @@
                         <router-link to="/login" slot="left">
                             <mt-button icon="back">返回</mt-button>
                         </router-link>
-                        <mt-button icon="more" slot="right"></mt-button>
+                        <mt-button icon="more" slot="right" @click="toSearch"></mt-button>
                     </mt-header>
                     <mt-header title="云盘" v-if="selected=='云盘'">
                         <router-link to="/login" slot="left">
@@ -29,7 +29,7 @@
                     </mt-header>
                 </div>
 
-                <mt-tab-container class="page-tabbar-container" v-model="selected">
+                <mt-tab-container class="page-tabbar-container" v-model="selected" swipeable>
                     <mt-tab-container-item id="应用">
                         <!--<mt-cell v-for="(n,key) in 10" :title="'应用 ' + n" />-->
                         <mt-navbar v-model="actived1" style="margin-bottom: 15px">
@@ -38,7 +38,7 @@
                             <mt-tab-item id="3">应用三</mt-tab-item>
                         </mt-navbar>
 
-                        <mt-tab-container v-model="actived1">
+                        <mt-tab-container v-model="actived1" swipeable>
                             <mt-tab-container-item id="1">
                                 <ul class="ula" >
                                     <li>
@@ -195,6 +195,9 @@
             this.getList();
         },
         methods: {
+            toSearch(){
+                this.$router.push({path:'./searchPage'})
+            },
             lookBs(){
               if(this.isShowBs==false){
                   this.isShowBs=true
