@@ -276,6 +276,7 @@
                 background: #fff;
                 border-bottom: 1px solid lightgray;
                 padding: 0 10px;
+                color:#ccc
             }
         }
     }

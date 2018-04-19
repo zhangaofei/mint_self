@@ -13,14 +13,13 @@ import redirectIpadT from '../views/login/jumpPage/redirectIpadT';
 import Layout from '../views/layout/Layout';
 
 import downLoad from '../views/login/downLoad';
-<<<<<<< HEAD
 
 //==========================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 import apply from '../views/Mbclient/apply';
-=======
+
 //=====
 import forgetPsw from '../views/login/loginComponents/forgetPsw';
->>>>>>> ef3544854a5feaf0b05a2732bd19048634670ab2
+
 
 const Err404 = resolve => require(['../views/error/404.vue'], resolve);
 const Err401 = resolve => require(['../views/error/401.vue'], resolve);
