@@ -3,7 +3,7 @@
         <div class="page-tabbar">
             <div class="page-wrap">
                 <div class="page-title">
-                    <mt-header title="应用" v-if="selected=='应用'">
+                    <mt-header title="应用中心" v-if="selected=='应用'">
                         <router-link to="/login" slot="left">
                             <mt-button icon="back">返回</mt-button>
                         </router-link>
@@ -16,12 +16,6 @@
                         <mt-button icon="more" slot="right"></mt-button>
                     </mt-header>
                     <mt-header title="账号" v-if="selected=='账号'">
-                        <router-link to="/login" slot="left">
-                            <mt-button icon="back">返回</mt-button>
-                        </router-link>
-                        <mt-button icon="more" slot="right"></mt-button>
-                    </mt-header>
-                    <mt-header title="我的" v-if="selected=='我的'">
                         <router-link to="/login" slot="left">
                             <mt-button icon="back">返回</mt-button>
                         </router-link>
@@ -45,7 +39,7 @@
                                         <p class="p_left">推荐应用</p>
                                         <p class="p_right">查看更多</p>
                                     </li>
-                                    <li v-for="(n,key) in 3">
+                                    <li v-for="(n,key) in 3" :key="n">
                                         <img slot="icon" :src=footImg width="30" height="30">
                                         <span class="spa_top">name</span>
                                         <span class="spa_bottom">text</span>
@@ -57,7 +51,7 @@
                                         <p class="p_left">BS应用</p>
                                         <p class="p_right">查看更多</p>
                                     </li>
-                                    <li v-for="(n,key) in 3">
+                                    <li v-for="(n,key) in 3" :key="n">
                                         <img slot="icon" :src=footImg  width="30" height="30">
                                         <span class="spa_top">22</span>
                                         <span class="spa_bottom">33</span>
@@ -69,7 +63,7 @@
                                         <p class="p_left">CS应用</p>
                                         <p class="p_right">查看更多</p>
                                     </li>
-                                    <li v-for="(n,key) in 3">
+                                    <li v-for="(n,key) in 3" :key="n">
                                         <img slot="icon" :src=footImg width="30" height="30">
                                         <span class="spa_top">22</span>
                                         <span class="spa_bottom">33</span>
@@ -78,46 +72,47 @@
                                 </ul>
 
                             </mt-tab-container-item>
+
                             <mt-tab-container-item id="2">
-                                <!--<ul class="ula" >-->
-                                    <!--<li>-->
-                                        <!--<p class="p_left">推荐应用</p>-->
-                                        <!--<p class="p_right">查看更多</p>-->
-                                    <!--</li>-->
-                                    <!--<li v-for="(n,key) in 3">-->
-                                        <!--<img slot="icon" :src='item.iconPath' width="30" height="30">-->
-                                        <!--<span class="spa_top">{{item.name}}</span>-->
-                                        <!--&lt;!&ndash;<span class="spa_bottom">text</span>&ndash;&gt;-->
-                                        <!--<span class="spa_right"> <img slot="icon" :src=grey width="18" height="18"></span>-->
-                                    <!--</li>-->
-                                <!--</ul>-->
                                 <ul class="ula"   v-infinite-scroll="loadMore"
                                     infinite-scroll-disabled="loading"
                                     infinite-scroll-distance="10">
                                     <li>
                                         <p class="p_left">BS应用</p>
-                                        <p class="p_right" @click="lookBs" v-if="isShowBs==false?true:false"> > </p>
-                                        <p class="p_right" @click="lookBs" v-if="isShowBs==true?true:false"> ∨ </p>
+                                        <p class="p_right" @click="lookBs" v-if="isShowBs==false?true:false" style="font-size: 20px;margin-right:10px"> > </p>
+                                        <p class="p_right" @click="lookBs" v-if="isShowBs==true?true:false" style="font-size: 20px;margin-right:10px"> ∨ </p>
                                     </li>
-                                    <li v-for="item in list" v-if="isShowBs">
+                                    <li v-for="item in list" v-if="true" :key="item">
                                         <img slot="icon" :src='item.iconPath' width="30" height="30">
                                         <span class="spa_top">{{item.name}}</span>
                                         <!--<span class="spa_bottom">33</span>-->
-                                        <span class="spa_right"> <img slot="icon" :src=grey width="18" height="18"></span>
+                                        <span class="spa_right" v-if="'1'==item.is_collect"> <img slot="icon" :src=red width="18" height="18" @click="collection(item)" ></span>
+                                        <span class="spa_right" v-else> <img slot="icon" :src=grey width="18" height="18" @click="collection(item)"></span>
                                     </li>
                                 </ul>
                             </mt-tab-container-item>
+
                             <mt-tab-container-item id="3">
-                                <mt-cell v-for="(n,key) in 6" :title="'选项 ' + n" />
+                                <ul class="ula"   v-infinite-scroll="loadMore"
+                                    infinite-scroll-disabled="loading"
+                                    infinite-scroll-distance="10">
+                                    <li v-for="item in collectList"  :key="item">
+                                        <img slot="icon" :src='item.iconPath' width="30" height="30">
+                                        <span class="spa_top">{{item.name}}</span>
+                                        <!--<span class="spa_bottom">33</span>-->
+                                        <span class="spa_right" v-if="'1'==item.is_collect"> <img slot="icon" :src=red width="18" height="18" @click="collection(item)" ></span>
+                                        <!--<span class="spa_right" v-else> <img slot="icon" :src=red width="18" height="18" @click="collection(item)"></span>-->
+                                    </li>
+                                </ul>
                             </mt-tab-container-item>
                         </mt-tab-container>
 
                     </mt-tab-container-item>
                     <mt-tab-container-item id="云盘">
-                        <mt-cell v-for="(n,key) in 5" :title="'云盘 ' + n" />
+                        <mt-cell v-for="(n,key) in 5"  :key="n" :title="'云盘' + n" />
                     </mt-tab-container-item>
                     <mt-tab-container-item id="账号">
-                        <mt-cell v-for="(n,key) in 7" :title="'账号 ' + n" />
+                        <mt-cell v-for="(n,key) in 7" :key="n" :title="'账号 ' + n" />
 
                         <mt-button type="danger" size="large" @click="logout">退出</mt-button>
                     </mt-tab-container-item>
@@ -138,10 +133,6 @@
                     <img slot="icon" :src=footImg>
                     账号
                 </mt-tab-item>
-                <!--<mt-tab-item id="我的">-->
-                    <!--<img slot="icon" :src=footImg>-->
-                    <!--我的-->
-                <!--</mt-tab-item>-->
             </mt-tabbar>
         </div>
     </div>
@@ -157,31 +148,33 @@
         },
         computed: {
             ...mapGetters([
-                // 'c_name',
-                // 'uid',
-                // 'login_timestamp',
-                // 'login_msg',
-                // 'msgs',
-                // 'vpnStatus',
-                // 'versionName',
-                // 'isForceUpdate',
-                // 'c_groupId',
-                // 'token',
-                // 'c_passwrod',//加密密码
-                // 'clearPasswrod',//明文密码
-                // 'setonVpnFlag',
-                // 'lowVersion'
+                'c_name',
+                'uid',
+                'login_timestamp',
+                'login_msg',
+                'msgs',
+                'vpnStatus',
+                'versionName',
+                'isForceUpdate',
+                'c_groupId',
+                'token',
+                'c_passwrod',//加密密码
+                'clearPasswrod',//明文密码
+                'setonVpnFlag',
+                'lowVersion'
             ]),
         },
         data(){
             return{
                 footImg:require('@/assets/imgs/git.png'),
                 grey:require('@/assets/client_home/grey_heart.png'),
+                red:require('@/assets/client_home/red_heart.png'),
                 selected:'应用',
                 actived1:'1',
                 actived2:'2',
                 actived3:'3',
                 list:[],
+                collectList:[],
                 bsPages: {
                     page: 1,
                     page_size: 16,
@@ -215,16 +208,41 @@
                 }).catch((err) => {
                     console.log(err);
                 });
+                allFavorites({user_id: this.uid}).then((resp) => {
+                    this.collectList = resp.data.web_res.concat(resp.data.client_res).concat(resp.data.rdp_res);
+
+                }).catch((err) => {
+                    console.log(err);
+                });
             },
+            collection(item) {
+                //类型 0:(bs类型),1:rdp,2:TCP/Web
+                let app_type;
+                if ('0' == item.is_collect) {
+                    item.is_collect = '1'
+                } else {
+                    item.is_collect = '0'
+                }
+                if(item.app_type=='TCP'||item.app_type=='Web'||item.app_type=='ST'){
+                    app_type=2;
+                }else if(item.hasOwnProperty('width')){
+                    app_type=1;
+                }else{
+                    app_type=0;
+                }
+                if((item.hasOwnProperty('if_modify')||item.hasOwnProperty('width'))){
+                    this.toDownload();
+                }else {
+                    collectModify({user_id: this.uid, resource_id: item.id, is_collect: item.is_collect,app_type:app_type}).then((resp) => {
+                        this.getList();
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+                }
+            },
+
             loadMore() {
                 this.loading = true;
-                // setTimeout(() => {
-                //     let last = this.list[this.list.length - 1];
-                //     for (let i = 1; i <= 10; i++) {
-                //         this.list.push(last + i);
-                //     }
-                //     this.loading = false;
-                // }, 2500);
             },
             logout(){
                 this.$store.dispatch('LogOut').then(() => {
@@ -233,8 +251,6 @@
 
                 })
             },
-
-
         }
     }
 </script>

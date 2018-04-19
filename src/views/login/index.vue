@@ -52,20 +52,20 @@
             },
             vailded(){
                 // if (/^[0-9]{6,20}$/.test(value) == false) {
-               if(/^[0-9]*$/.test(this.form.username)==false){
-                   Toast('名称为数字、字母、下划线');
-                   return false
-               }
-                if(/^[0-9]*$/.test(this.form.password)==false){
-                    Toast('密码为数字、字母');
+               // if(/^[0-9]*$/.test(this.form.username.trim())==false||this.form.username.trim()==''){
+               //     Toast('名称为数字、字母、下划线');
+               //     return false
+               // }
+                if(/^[0-9]*$/.test(this.form.password.trim())==false||this.form.password.trim()==''){
+                    Toast('密码为数字');
                     return false
                 }
                 return true
             },
             handLogin(){
-                console.log(this.vailded(),'mmmmn');
+                console.log(this.vailded(),'mmmmn',this.form.username,'====');
                 if(this.vailded()){
-                    this.$router.push({path:'./apply'});
+                    // this.$router.push({path:'./apply'});
                     this.$store.dispatch('login',this.form).then((res) => {
                         if (res.status == 1) {
                             this.$router.push({path: '/apply'});
