@@ -13,9 +13,9 @@ import redirectIpadT from '../views/login/jumpPage/redirectIpadT';
 import Layout from '../views/layout/Layout';
 
 import downLoad from '../views/login/downLoad';
-
-//==========================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//==========================================
 import apply from '../views/Mbclient/apply';
+import searchPage from '../views/Mbclient/searchPage';
 
 //=====
 import forgetPsw from '../views/login/loginComponents/forgetPsw';
@@ -64,7 +64,7 @@ export default new Router({
         },
         //
         {path: '/apply', component: apply, hidden: true},
-
+        {path: '/searchPage', component: searchPage, hidden: true},
         {path: '*', redirect: '/404', hidden: true, meta: -1},
     ]
 });

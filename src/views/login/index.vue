@@ -18,7 +18,7 @@
                 <span  >注册</span>
             </p>
             <p class="p2 pointer">
-                <span @click="actionSheet">忘记密码</span>
+                <span>忘记密码</span>
             </p>
         </div>
     </div>
@@ -50,15 +50,30 @@
             handleClose(){
                 console.log('关闭')
             },
+            vailded(){
+                // if (/^[0-9]{6,20}$/.test(value) == false) {
+               if(/^[0-9]*$/.test(this.form.username)==false){
+                   Toast('名称为数字、字母、下划线');
+                   return false
+               }
+                if(/^[0-9]*$/.test(this.form.password)==false){
+                    Toast('密码为数字、字母');
+                    return false
+                }
+                return true
+            },
             handLogin(){
-              this.$router.push({path:'./apply'});
-                this.$store.dispatch('login',this.form).then((res) => {
-                    if (res.status == 1) {
-                        this.$router.push({path: '/apply'});
-                    }else if (res.status == -1) {
-                        Toast(res.msg);
-                    }
-                })
+                console.log(this.vailded(),'mmmmn');
+                if(this.vailded()){
+                    this.$router.push({path:'./apply'});
+                    this.$store.dispatch('login',this.form).then((res) => {
+                        if (res.status == 1) {
+                            this.$router.push({path: '/apply'});
+                        }else if (res.status == -1) {
+                            Toast(res.msg);
+                        }
+                    })
+                }
             },
         }
     }
@@ -66,6 +81,10 @@
 <style rel="stylesheet/scss" lang="scss">
     .pointer{
         cursor: pointer;
+    }
+    input:-webkit-autofill{
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+        /*border: 1px solid #CCC!important;*/
     }
     .logined{
         position: relative;

@@ -62,11 +62,12 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                query: {
-                    limit: 100000000,
-                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
-                }
+                // loader: 'url-loader',
+                loader: "url-loader?limit=name: utils.assetsPath(\'img/[name].[hash:7].[ext]\')"
+                // query: {
+                //     limit: 150000,
+                //     name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                // }
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
