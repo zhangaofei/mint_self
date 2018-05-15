@@ -16,6 +16,9 @@ import downLoad from '../views/login/downLoad';
 //==========================================
 import apply from '../views/Mbclient/apply';
 import severStatus from '../views/Mbclient/components/severStatus/severStatus';
+import safeProtect from '../views/Mbclient/components/safeProtect/safeProtect';
+import modPsw from '../views/Mbclient/components/safeProtect/modPsw';
+
 
 import searchPage from '../views/Mbclient/searchPage';
 
@@ -28,7 +31,6 @@ const Err401 = resolve => require(['../views/error/401.vue'], resolve);
 // const register = resolve => require(['../views/login/register.vue'], resolve);
 const enlinkWeb = resolve => require(['../views/client/home/first/web.vue'], resolve);
 const myAccount = resolve => require(['../views/client/home/first/myAccount.vue'], resolve);
-// const severStatus= resolve => require(['../views/client/home/first/myAccount.vue'], resolve);
 Vue.use(Router);
 
 // export default new Router({
@@ -66,9 +68,26 @@ export default new Router({
             ]
         },
         //
-        {path: '/apply', component: apply, hidden: true},
+        {path: '/apply', component: apply, hidden: true,meta: {
+                keepAlive: true // 不需要缓存
+            }},
         {path: '/searchPage', component: searchPage, hidden: true},
-        {path: '/severStatus', component: severStatus, hidden: true},
+        {path: '/severStatus', component: severStatus, hidden: true,meta: {
+                keepAlive: true // 不需要缓存
+            }},
+        {
+            path: '/safeProtect',
+            component: safeProtect,
+            hidden: true,
+            children:[
+                {
+                    path: '/safeProtect/modPsw',
+                    component: modPsw,
+                    hidden: true
+                }
+            ]
+        },
+        // {path: '/modPsw', component: modPsw, hidden: true},
         {path: '*', redirect: '/404', hidden: true, meta: -1},
     ]
 });

@@ -31,23 +31,26 @@ Object.keys(filters).forEach(key => {
 });
 
 const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad','/forgetPsw'];
-router.beforeEach((to, from, next) => {
-    if (store.getters.token) {
-        console.log(store.getters.token,'token')
-        if ('/login' === to.path || '/' === to.path || '/admin' === to.path || ('/404' == to.path && '/' == to.redirectedFrom)) {
-            next({path: '/apply'});
-        }
-        else {
-            next();
-        }
-    } else {
-        if (whiteList && whiteList.indexOf(to.path) !== -1) {
-            next()
-        } else {
-            next('/login');
-        }
-    }
-});
+// router.beforeEach((to, from, next) => {
+//     if (store.getters.token) {
+//         console.log(store.getters.token,'token')
+//         if ('/login' === to.path || '/' === to.path || '/admin' === to.path || ('/404' == to.path && '/' == to.redirectedFrom)) {
+//             next({path: '/apply'});
+//         }
+//         else {
+//             next();
+//         }
+//     } else {
+//         if (whiteList && whiteList.indexOf(to.path) !== -1) {
+//             next();
+//             next({path: '/apply'});
+//         } else {
+//             // next('/login');
+//             //测试
+//             next({path: '/apply'});
+//         }
+//     }
+// });
 
 router.afterEach(() => {
     // NProgress.done();
