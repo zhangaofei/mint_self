@@ -15,6 +15,8 @@ import Layout from '../views/layout/Layout';
 import downLoad from '../views/login/downLoad';
 //==========================================
 import apply from '../views/Mbclient/apply';
+import severStatus from '../views/Mbclient/components/severStatus/severStatus';
+
 import searchPage from '../views/Mbclient/searchPage';
 
 //=====
@@ -26,6 +28,7 @@ const Err401 = resolve => require(['../views/error/401.vue'], resolve);
 // const register = resolve => require(['../views/login/register.vue'], resolve);
 const enlinkWeb = resolve => require(['../views/client/home/first/web.vue'], resolve);
 const myAccount = resolve => require(['../views/client/home/first/myAccount.vue'], resolve);
+// const severStatus= resolve => require(['../views/client/home/first/myAccount.vue'], resolve);
 Vue.use(Router);
 
 // export default new Router({
@@ -65,6 +68,7 @@ export default new Router({
         //
         {path: '/apply', component: apply, hidden: true},
         {path: '/searchPage', component: searchPage, hidden: true},
+        {path: '/severStatus', component: severStatus, hidden: true},
         {path: '*', redirect: '/404', hidden: true, meta: -1},
     ]
 });

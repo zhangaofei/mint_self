@@ -6,7 +6,7 @@
         </div>
         <div class="middle">
            <div >
-               <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
+               <mt-field label="用户名" placeholder="请输入用户名" v-model="form.name"></mt-field>
                <mt-field label="密码" placeholder="请输入密码" type="password" v-model="form.password"></mt-field>
            </div>
             <div class="login">
@@ -37,7 +37,7 @@
             return {
                 logo:require('@/assets/imgs/git.png'),
                form:{
-                   username:'',
+                   name:'',
                    password:''
                }
             }

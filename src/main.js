@@ -30,24 +30,24 @@ Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 });
 
-// const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad','/forgetPsw'];
-// router.beforeEach((to, from, next) => {
-//     if (store.getters.token) {
-//         console.log(store.getters.token,'token')
-//         if ('/login' === to.path || '/' === to.path || '/admin' === to.path || ('/404' == to.path && '/' == to.redirectedFrom)) {
-//             next({path: '/apply'});
-//         }
-//         else {
-//             next();
-//         }
-//     } else {
-//         if (whiteList && whiteList.indexOf(to.path) !== -1) {
-//             next()
-//         } else {
-//             next('/login');
-//         }
-//     }
-// });
+const whiteList = ['/redirectAndroid','/login', '/authredirect', '/reset', '/sendpwd', '/downLoad','/redirectIos','/redirectIpad','/forgetPsw'];
+router.beforeEach((to, from, next) => {
+    if (store.getters.token) {
+        console.log(store.getters.token,'token')
+        if ('/login' === to.path || '/' === to.path || '/admin' === to.path || ('/404' == to.path && '/' == to.redirectedFrom)) {
+            next({path: '/apply'});
+        }
+        else {
+            next();
+        }
+    } else {
+        if (whiteList && whiteList.indexOf(to.path) !== -1) {
+            next()
+        } else {
+            next('/login');
+        }
+    }
+});
 
 router.afterEach(() => {
     // NProgress.done();

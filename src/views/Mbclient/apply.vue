@@ -23,23 +23,45 @@
                     </mt-header>
                 </div>
 
-                <mt-tab-container class="page-tabbar-container" v-model="selected" swipeable>
+                <mt-tab-container class="page-tabbar-container" v-model="selected" swipeable style="padding-bottom: 64px;">
                     <mt-tab-container-item id="应用">
-                        <!--<mt-cell v-for="(n,key) in 10" :title="'应用 ' + n" />-->
                         <mt-navbar v-model="actived1" style="margin-bottom: 15px">
-                            <mt-tab-item id="1">应用一</mt-tab-item>
-                            <mt-tab-item id="2">应用二</mt-tab-item>
-                            <mt-tab-item id="3">应用三</mt-tab-item>
+                            <mt-tab-item id="1">我的收藏</mt-tab-item>
+                            <mt-tab-item id="2">全部应用</mt-tab-item>
+                            <mt-tab-item id="3">应用</mt-tab-item>
                         </mt-navbar>
 
                         <mt-tab-container v-model="actived1" swipeable>
                             <mt-tab-container-item id="1">
                                 <ul class="ula" >
+                                    <li v-for="(item,index) in collectList"  :key="index">
+                                        <img slot="icon" :src='item.iconPath' width="30" height="30">
+                                        <span class="spa_top" v-if="item.hasOwnProperty('name')">{{item.name}}</span>
+                                        <span class="spa_top" v-else-if="item.hasOwnProperty('app_name')">{{item.app_name}}</span>
+                                        <!--<span class="spa_bottom">33</span>-->
+                                        <span class="spa_right" v-if="'1'==item.is_collect"> <img slot="icon" :src=red width="18" height="18" @click="favoriteCollection(item)" ></span>
+                                        <!--<span class="spa_right" v-else> <img slot="icon" :src=red width="18" height="18" @click="collection(item)"></span>-->
+                                    </li>
+                                </ul>
+
+
+                            </mt-tab-container-item>
+
+                            <mt-tab-container-item id="2">
+                                <bs :bsList="bsList" @bsCollection="collection"></bs>
+
+                                <rdp :rdpList="rdpList" @rdpCollection="collection"></rdp>
+
+                                <cs :csList="csList" @csCollection="collection"></cs>
+                            </mt-tab-container-item>
+
+                            <mt-tab-container-item id="3">
+                                <ul class="ula" >
                                     <li>
                                         <p class="p_left">推荐应用</p>
                                         <p class="p_right">查看更多</p>
                                     </li>
-                                    <li v-for="(n,key) in 3" :key="n">
+                                    <li v-for="(n,index) in 3" :key="index">
                                         <img slot="icon" :src=footImg width="30" height="30">
                                         <span class="spa_top">name</span>
                                         <span class="spa_bottom">text</span>
@@ -51,7 +73,7 @@
                                         <p class="p_left">BS应用</p>
                                         <p class="p_right">查看更多</p>
                                     </li>
-                                    <li v-for="(n,key) in 3" :key="n">
+                                    <li v-for="(n,index) in 3" :key="index">
                                         <img slot="icon" :src=footImg  width="30" height="30">
                                         <span class="spa_top">22</span>
                                         <span class="spa_bottom">33</span>
@@ -63,45 +85,11 @@
                                         <p class="p_left">CS应用</p>
                                         <p class="p_right">查看更多</p>
                                     </li>
-                                    <li v-for="(n,key) in 3" :key="n">
+                                    <li v-for="(n,index) in 3" :key="index">
                                         <img slot="icon" :src=footImg width="30" height="30">
                                         <span class="spa_top">22</span>
                                         <span class="spa_bottom">33</span>
                                         <span class="spa_right"> <img slot="icon" :src=grey width="18" height="18"></span>
-                                    </li>
-                                </ul>
-
-                            </mt-tab-container-item>
-
-                            <mt-tab-container-item id="2">
-                                <ul class="ula"   v-infinite-scroll="loadMore"
-                                    infinite-scroll-disabled="loading"
-                                    infinite-scroll-distance="10">
-                                    <li>
-                                        <p class="p_left">BS应用</p>
-                                        <p class="p_right" @click="lookBs" v-if="isShowBs==false?true:false" style="font-size: 20px;margin-right:10px"> > </p>
-                                        <p class="p_right" @click="lookBs" v-if="isShowBs==true?true:false" style="font-size: 20px;margin-right:10px"> ∨ </p>
-                                    </li>
-                                    <li v-for="item in list" v-if="true" :key="item">
-                                        <img slot="icon" :src='item.iconPath' width="30" height="30">
-                                        <span class="spa_top">{{item.name}}</span>
-                                        <!--<span class="spa_bottom">33</span>-->
-                                        <span class="spa_right" v-if="'1'==item.is_collect"> <img slot="icon" :src=red width="18" height="18" @click="collection(item)" ></span>
-                                        <span class="spa_right" v-else> <img slot="icon" :src=grey width="18" height="18" @click="collection(item)"></span>
-                                    </li>
-                                </ul>
-                            </mt-tab-container-item>
-
-                            <mt-tab-container-item id="3">
-                                <ul class="ula"   v-infinite-scroll="loadMore"
-                                    infinite-scroll-disabled="loading"
-                                    infinite-scroll-distance="10">
-                                    <li v-for="item in collectList"  :key="item">
-                                        <img slot="icon" :src='item.iconPath' width="30" height="30">
-                                        <span class="spa_top">{{item.name}}</span>
-                                        <!--<span class="spa_bottom">33</span>-->
-                                        <span class="spa_right" v-if="'1'==item.is_collect"> <img slot="icon" :src=red width="18" height="18" @click="collection(item)" ></span>
-                                        <!--<span class="spa_right" v-else> <img slot="icon" :src=red width="18" height="18" @click="collection(item)"></span>-->
                                     </li>
                                 </ul>
                             </mt-tab-container-item>
@@ -109,11 +97,51 @@
 
                     </mt-tab-container-item>
                     <mt-tab-container-item id="云盘">
-                        <mt-cell v-for="(n,key) in 5"  :key="n" :title="'云盘' + n" />
+                        <mt-cell v-for="(n,index) in 5"  :key="index" :title="'云盘' + n" />
                     </mt-tab-container-item>
                     <mt-tab-container-item id="账号">
-                        <mt-cell v-for="(n,key) in 7" :key="n" :title="'账号 ' + n" />
-
+                        <ul class="ula" >
+                            <li style="height: 70px;line-height: 70px;background:aliceblue">
+                                <img slot="icon" :src=footImg  width="30" height="30">
+                                <span class="spa_top" style="top: -9px;">{{c_name}}</span>
+                                <span class="spa_bottom" style="position: relative;top: 10px;left: -23px;">{{full_name}}</span>
+                                <span class="spa_right"> ></span>
+                            </li>
+                        </ul>
+                        <mt-cell
+                                title="我的钱包"
+                                is-link
+                                value="">
+                        </mt-cell>
+                        <mt-cell
+                                title="套餐管理"
+                                is-link
+                                value="">
+                        </mt-cell>
+                        <br>
+                        <mt-cell
+                                title="服务状态"
+                                :to="link"
+                                is-link
+                                value="">
+                        </mt-cell>
+                        <mt-cell
+                                title="安全保护"
+                                is-link
+                                value="">
+                        </mt-cell>
+                        <mt-cell
+                                title="系统设置"
+                                is-link
+                                value="">
+                        </mt-cell>
+                        <mt-cell
+                                style="margin-top: 10px;"
+                                title="关于与帮助"
+                                is-link
+                                value="">
+                        </mt-cell>
+                        <br>
                         <mt-button type="danger" size="large" @click="logout">退出</mt-button>
                     </mt-tab-container-item>
 
@@ -140,11 +168,15 @@
 
 <script>
     import {getResourceList, getCollectList, collectModify, getFlow,getCsList,getRdpList,getback,modCSparam,allFavorites} from 'api/web/web';
-    import {mapGetters} from 'vuex'
+    import {mapGetters} from 'vuex';
+    import bs  from './subApply/bs';
+    import rdp from './subApply/rdp';
+    import cs from './subApply/cs';
     export default {
-        name: "apply",
         components: {
-            // circleChart
+            bs,
+            rdp,
+            cs
         },
         computed: {
             ...mapGetters([
@@ -161,7 +193,8 @@
                 'c_passwrod',//加密密码
                 'clearPasswrod',//明文密码
                 'setonVpnFlag',
-                'lowVersion'
+                'lowVersion',
+                'full_name'
             ]),
         },
         data(){
@@ -173,15 +206,16 @@
                 actived1:'1',
                 actived2:'2',
                 actived3:'3',
-                list:[],
+                bsList:[],
+                rdpList:[],
+                csList:[],
                 collectList:[],
                 bsPages: {
                     page: 1,
                     page_size: 16,
                     pages: null// 总条数
                 },
-                loading:false,
-                isShowBs:false
+                link:'/severStatus'
             }
         },
         created(){
@@ -191,20 +225,19 @@
             toSearch(){
                 this.$router.push({path:'./searchPage'})
             },
-            lookBs(){
-              if(this.isShowBs==false){
-                  this.isShowBs=true
-              }else {
-                  this.isShowBs=false
-              }
-            },
             getList() {
                 getResourceList(this.bsPages).then((resp) => {
-                    // this.bsPages.pages = resp.data.items.page_count;
-                    this.list = resp.data.items.res;
-                    console.log(this.list,'lsit==')
+                    this.bsList = resp.data.items.res;
+                    console.log(this.bsList,'lsit==')
                     // this.setProtocol(resp.http, resp.https);
 
+                }).catch((err) => {
+                    console.log(err);
+                });
+                getRdpList(this.bsPages).then((resp) => {//client 和rdp的集合
+                    this.rdpList=resp.data.rdp_res.res;
+                    this.csList=resp.data.apps_res.res;
+                    console.log(this.csList,'csList==')
                 }).catch((err) => {
                     console.log(err);
                 });
@@ -240,9 +273,22 @@
                     });
                 }
             },
-
-            loadMore() {
-                this.loading = true;
+            favoriteCollection(n) {
+                console.log(n,'item')
+                let app_type;
+                n.is_collect = '0';
+                if(n.app_type=='TCP'||n.app_type=='Web'||n.app_type=='ST'){
+                    app_type=2;
+                }else if(n.hasOwnProperty('width')){
+                    app_type=1;
+                }else{
+                    app_type=0;
+                }
+                collectModify({user_id: this.uid, resource_id: n.id, is_collect: n.is_collect,app_type:app_type}).then((resp) => {
+                    this.getList();
+                }).catch((err) => {
+                    console.log(err);
+                });
             },
             logout(){
                 this.$store.dispatch('LogOut').then(() => {
@@ -265,7 +311,7 @@
     .apply{
         background-color: #fafafa;
         .mint-cell-value{
-            flex: 6;
+            /*flex: 6;*/
         }
         .spa_right{
             position: absolute;
@@ -341,32 +387,3 @@
 
 
 
-
-
-
-
-<!--<div>-->
-    <!--<mt-header title="标题1">-->
-        <!--<router-link to="/login" slot="left">-->
-            <!--<mt-button icon="back">返回</mt-button>-->
-        <!--</router-link>-->
-        <!--<mt-button icon="more" slot="right"></mt-button>-->
-    <!--</mt-header>-->
-<!--</div>-->
-<!--<div class="footer">-->
-    <!--<mt-tabbar v-model="selected">-->
-        <!--<mt-tab-item id="外卖">-->
-            <!--&lt;!&ndash;<img slot="icon" src="../assets/100x100.png">&ndash;&gt;-->
-            <!--应用-->
-        <!--</mt-tab-item>-->
-        <!--<mt-tab-item id="订单">-->
-            <!--&lt;!&ndash;<img slot="icon" src="../assets/100x100.png">&ndash;&gt;-->
-            <!--云盘-->
-        <!--</mt-tab-item>-->
-        <!--<mt-tab-item id="发现">-->
-            <!--&lt;!&ndash;<img slot="icon" src="../assets/100x100.png">&ndash;&gt;-->
-            <!--账号-->
-        <!--</mt-tab-item>-->
-    <!--</mt-tabbar>-->
-
-<!--</div>-->

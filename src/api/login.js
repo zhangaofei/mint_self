@@ -29,7 +29,7 @@ export function loginByEmail(userInfo) {
         }
     }else {
         info={
-            name:userInfo.username,
+            name:userInfo.name,
             password:p,
             t:userInfo.password
         }
