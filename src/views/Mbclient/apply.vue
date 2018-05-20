@@ -1,4 +1,7 @@
 <template>
+    <!--<keep-alive include="test-keep-alive">-->
+
+
     <div class="apply">
         <div class="page-tabbar">
             <div class="page-wrap">
@@ -23,6 +26,8 @@
                     </mt-header>
                 </div>
 
+
+
                 <mt-tab-container class="page-tabbar-container" v-model="selected" swipeable style="padding-bottom: 64px;">
                     <mt-tab-container-item id="应用">
                         <mt-navbar v-model="actived1" style="margin-bottom: 15px">
@@ -43,7 +48,6 @@
                                         <!--<span class="spa_right" v-else> <img slot="icon" :src=red width="18" height="18" @click="collection(item)"></span>-->
                                     </li>
                                 </ul>
-
 
                             </mt-tab-container-item>
 
@@ -99,6 +103,9 @@
                     <mt-tab-container-item id="云盘">
                         <mt-cell v-for="(n,index) in 5"  :key="index" :title="'云盘' + n" />
                     </mt-tab-container-item>
+
+                    <keep-alive include="test-keep-alive">
+                    </keep-alive>
                     <mt-tab-container-item id="账号">
                         <ul class="ula" >
                             <li style="height: 70px;line-height: 70px;background:aliceblue">
@@ -121,12 +128,13 @@
                         <br>
                         <mt-cell
                                 title="服务状态"
-                                :to="link"
+                                :to="severStatus"
                                 is-link
                                 value="">
                         </mt-cell>
                         <mt-cell
                                 title="安全保护"
+                                :to="safeProtect"
                                 is-link
                                 value="">
                         </mt-cell>
@@ -146,6 +154,7 @@
                     </mt-tab-container-item>
 
                 </mt-tab-container>
+
             </div>
 
             <mt-tabbar v-model="selected" fixed>
@@ -164,6 +173,7 @@
             </mt-tabbar>
         </div>
     </div>
+    <!--</keep-alive>-->
 </template>
 
 <script>
@@ -173,6 +183,7 @@
     import rdp from './subApply/rdp';
     import cs from './subApply/cs';
     export default {
+        name:'test-keep-alive',
         components: {
             bs,
             rdp,
@@ -199,6 +210,7 @@
         },
         data(){
             return{
+                // includedComponents: "test-keep-alive",
                 footImg:require('@/assets/imgs/git.png'),
                 grey:require('@/assets/client_home/grey_heart.png'),
                 red:require('@/assets/client_home/red_heart.png'),
@@ -215,7 +227,8 @@
                     page_size: 16,
                     pages: null// 总条数
                 },
-                link:'/severStatus'
+                severStatus:'/severStatus',
+                safeProtect:'/safeProtect'
             }
         },
         created(){
