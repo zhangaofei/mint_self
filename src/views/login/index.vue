@@ -64,14 +64,9 @@
             },
             handLogin(){
                 console.log(this.vailded(),'mmmmn',this.form.name,'====');
-<<<<<<< HEAD
                 this.$router.push({path: '/apply'});
                 // if(this.vailded()){
                     // this.$router.push({path:'./apply'});
-=======
-                if(this.vailded()){
-                    this.$router.push({path:'/apply'});
->>>>>>> d1c3c27323285acb53644a73580769d82d7ab86d
                     // this.$store.dispatch('login',this.form).then((res) => {
                     //     if (res.status == 1) {
                     //         this.$router.push({path: '/apply'});
@@ -79,11 +74,7 @@
                     //         Toast(res.msg);
                     //     }
                     // })
-<<<<<<< HEAD
                 // }
-=======
-                }
->>>>>>> d1c3c27323285acb53644a73580769d82d7ab86d
             },
         }
     }
