@@ -41,11 +41,14 @@ router.beforeEach((to, from, next) => {
             next();
         }
     } else {
-        if (whiteList && whiteList.indexOf(to.path) !== -1) {
-            next()
-        } else {
-            next('/login');
-        }
+        // if (whiteList && whiteList.indexOf(to.path) !== -1) {
+        //     next()
+        // } else {
+        //     next('/login');
+        // }
+
+        // next({path: '/apply'});//
+        next()
     }
 });
 

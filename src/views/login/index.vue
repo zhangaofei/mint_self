@@ -63,17 +63,18 @@
                 return true
             },
             handLogin(){
-                console.log(this.vailded(),'mmmmn',this.form.username,'====');
-                if(this.vailded()){
+                console.log(this.vailded(),'mmmmn',this.form.name,'====');
+                this.$router.push({path: '/apply'});
+                // if(this.vailded()){
                     // this.$router.push({path:'./apply'});
-                    this.$store.dispatch('login',this.form).then((res) => {
-                        if (res.status == 1) {
-                            this.$router.push({path: '/apply'});
-                        }else if (res.status == -1) {
-                            Toast(res.msg);
-                        }
-                    })
-                }
+                    // this.$store.dispatch('login',this.form).then((res) => {
+                    //     if (res.status == 1) {
+                    //         this.$router.push({path: '/apply'});
+                    //     }else if (res.status == -1) {
+                    //         Toast(res.msg);
+                    //     }
+                    // })
+                // }
             },
         }
     }
